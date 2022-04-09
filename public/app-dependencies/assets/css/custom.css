@@ -1,0 +1,65 @@
+ul.icon {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+ul.icon li {
+    margin-bottom: 1rem;
+}
+
+.circle {
+    border: 1px solid red;
+    color: red;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+ul.social {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.social > li {
+    display: inline-block;
+}
+
+ul.social > li > a {
+    font-size: 18px;
+    display: block;
+    background: blue;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    transition: background 0.5s ease-in-out;
+}
+
+ul.social li a:hover {
+    background: black;
+}
+
+.generalized h4 {
+    color: black;
+    font-weight: bolder;
+    font-size: 40px;
+    margin-top: 40px;
+    text-transform: uppercase;
+}
+
+.generalized h4:after {
+    content: '';
+    display: block;
+    height: 4px;
+    background: red;
+    width: 80px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}

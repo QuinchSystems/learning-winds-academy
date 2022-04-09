@@ -29,6 +29,7 @@ Route::middleware(['guest', 'category_menu_view'])
         Route::get('/', [HomeController::class, 'index'])->name('welcome');
         Route::get('about', [HomeController::class, 'about'])->name('about');
         Route::get('contact', [HomeController::class, 'contact'])->name('contact');
+        Route::post('contact', [HomeController::class, 'postContact'])->name('contact');
         Route::get('privacy', [HomeController::class, 'privacy'])->name('privacy');
         Route::get('terms', [HomeController::class, 'terms'])->name('terms');
         Route::get('category/{category}', [HomeController::class, 'category'])->name('category');

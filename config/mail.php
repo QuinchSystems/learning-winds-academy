@@ -56,12 +56,12 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@learningwinds.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
     'contact' => [
-        'address' => env('MAIL_CONTACT_ADDRESS', 'anita@learningwindsacademy.com')
+        'address' => env('MAIL_CONTACT_ADDRESS', 'info@learningwinds.com')
     ],
 
     /*

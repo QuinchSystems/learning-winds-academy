@@ -134,18 +134,9 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-12 d-flex align-items-stretch">
-                <div class="member">
-                    <iframe style="width: 100%; height: 200px;" src="https://www.youtube.com/embed/dqGEF-vxwVE"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-
             <div class="col-lg-3 col-12 d-flex align-items-stretch text-center">
                 <div class="member">
-                    <iframe style="width: 100%; height: 200px;" src="https://www.youtube.com/embed/jNdLCOlHgcw"
+                    <iframe style="width: 100%; height: 200px;" src="https://www.youtube.com/embed/n6eDiO0xDWs"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -164,6 +155,15 @@
             <div class="col-lg-3 col-12 d-flex align-items-stretch text-center">
                 <div class="member">
                     <iframe style="width: 100%; height: 200px;" src="https://www.youtube.com/embed/THtaySRdePs"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-12 d-flex align-items-stretch">
+                <div class="member">
+                    <iframe style="width: 100%; height: 200px;" src="https://www.youtube.com/embed/dqGEF-vxwVE"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>

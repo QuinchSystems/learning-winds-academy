@@ -7,8 +7,10 @@ use App\Constant;
 use App\Course;
 use App\Helpers\MoodleClient;
 use App\Http\Controllers\Controller;
+use App\Mail\CoursePurchasedMail;
 use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Tzsk\Payu\Facade\Payment;
@@ -87,6 +89,11 @@ class PaymentController extends Controller
         try {
             MoodleClient::create()->assignMoodleCourse($enrolments);
             $user->courses()->attach($course);
+
+            // send mail to student
+            Mail::to($user->email)
+                ->send(new CoursePurchasedMail($user->first_name, $course->display_name));
+
             return response()->json(null);
         } catch (\Exception $e) {
             return response()->json(["message" => "Something went wrong"], 422);

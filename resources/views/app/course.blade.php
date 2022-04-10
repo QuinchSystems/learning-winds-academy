@@ -35,12 +35,12 @@
                         <h4 class="card-title">
                             <a href="{{ route('course', $course->id) }}">{!! $course->display_name !!}</a>
                         </h4>
-                        <ul class="ps-0 ms-0">
+                        {{-- <ul class="ps-0 ms-0">
                             <li class="d-flex align-items-center"><i class="bi bi-clock me-2"></i> <time
                                     datetime="{{ Carbon\Carbon::parse($course->m_created_at)->format('Y-m-d') }}">{{
                                     Carbon\Carbon::parse($course->m_created_at)->format('jS M,
                                     y h:i A') }}</time></li>
-                        </ul>
+                        </ul> --}}
 
                         <div class="card-text">
                             <div>

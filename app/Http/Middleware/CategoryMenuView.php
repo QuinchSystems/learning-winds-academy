@@ -16,8 +16,13 @@ class CategoryMenuView
      */
     public function handle($request, Closure $next)
     {
-        $categories = Category::with('courses:category_id,id,display_name')->get(['id', 'name', 'coursecount']);
+        $categories = Category::with(['courses' => function ($q) {
+            $q->select(['category_id', 'id', 'display_name'])
+                ->orderBy('display_name');
+        }])->get(['id', 'name', 'coursecount']);
+
         view()->share('categoryMenu', $categories);
+
         return $next($request);
     }
 }

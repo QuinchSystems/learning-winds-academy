@@ -52,7 +52,7 @@
                                 <div class="{{ $course->instructor_image ? 'col-md-9' : 'col-md-12' }}">
                                     <h4>About Instructor</h4>
                                     <h5 class="fw-bold">{{ $course->instructor_name }}</h5>
-                                    <p>{{ $course->about_instructor }}</p>
+                                    <p>{!! $course->about_instructor_html !!}</p>
                                 </div>
                                 @if ($course->instructor_image)
                                 <div class="col-md-3 text-end">

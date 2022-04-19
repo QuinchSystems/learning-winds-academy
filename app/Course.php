@@ -32,4 +32,9 @@ class Course extends Model
     {
         return $this->belongsToMany(AppUser::class, 'app_user_course', 'course_id', 'app_user_id');
     }
+
+    public function getAboutInstructorHtmlAttribute() {
+        $formattedAboutInstructor = nl2br($this->about_instructor);
+        return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $formattedAboutInstructor);
+    }
 }

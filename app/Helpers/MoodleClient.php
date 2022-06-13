@@ -135,7 +135,7 @@ class MoodleClient
 
             return json_decode($response->getResponse());
         } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage());
+            return null;
         }
     }
 

@@ -101,7 +101,7 @@ class RegisterController extends Controller
 
         $users = MoodleClient::create()->registerMoodleUser($moodleData);
 
-        if (count($users) > 0) {
+        if ($users && count($users) > 0) {
             return AppUser::create([
                 'm_userid' => $users[0]->id,
                 'first_name' => $data['first_name'],

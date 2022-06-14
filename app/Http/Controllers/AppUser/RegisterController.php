@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\AppUser;
 use App\Helpers\MoodleClient;
-use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -55,6 +55,22 @@ class RegisterController extends Controller
         return view('app.auth.register');
     }
 
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        try {
+            event(new Registered($user = $this->create($request->all())));
+
+            $this->guard()->login($user);
+
+            return $this->registered($request, $user)
+                ?: redirect($this->redirectPath());
+        } catch (\Throwable $th) {
+            return redirect()->route('app.register')->withErrors("Unable to register, please try again.");
+        }
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -86,22 +102,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $moodleData = [
-            "users" => [
-                [
-                    'username' => $data['username'],
-                    'password' => $data['password'],
-                    'firstname' => $data['first_name'],
-                    'lastname' => $data['last_name'],
-                    'email' => $data['email'],
-                    'lang' => 'en',
+        try {
+            $moodleData = [
+                "users" => [
+                    [
+                        'username' => $data['username'],
+                        'password' => $data['password'],
+                        'firstname' => $data['first_name'],
+                        'lastname' => $data['last_name'],
+                        'email' => $data['email'],
+                        'lang' => 'en',
+                    ]
                 ]
-            ]
-        ];
+            ];
 
-        $users = MoodleClient::create()->registerMoodleUser($moodleData);
+            $users = MoodleClient::create()->registerMoodleUser($moodleData);
 
-        if ($users && is_array($users) && count($users) > 0) {
             return AppUser::create([
                 'm_userid' => $users[0]->id,
                 'first_name' => $data['first_name'],
@@ -110,8 +126,8 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
-        } else {
-            return redirect()->route('app.register')->withErrors("Unable to register, please try again.");
+        } catch (\Throwable $th) {
+            throw $th->getMessage();
         }
     }
 

@@ -135,7 +135,7 @@ class MoodleClient
 
             return json_decode($response->getResponse());
         } catch (\Exception $ex) {
-            return redirect()->route('app.register')->withErrors("Unable to register, please try again.");
+            return false;
         }
     }
 

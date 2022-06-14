@@ -21,4 +21,13 @@
 
 <!-- Template Main JS File -->
 <script src="{{ asset('app-dependencies/assets/js/main.js') }}?version={{ App\Constant::APP_VERSION }}"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DT2PEB6S1F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DT2PEB6S1F');
+</script>
 @stack('js')

@@ -86,22 +86,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        try {
-            $moodleData = [
-                "users" => [
-                    [
-                        'username' => $data['username'],
-                        'password' => $data['password'],
-                        'firstname' => $data['first_name'],
-                        'lastname' => $data['last_name'],
-                        'email' => $data['email'],
-                        'lang' => 'en',
-                    ]
+        $moodleData = [
+            "users" => [
+                [
+                    'username' => $data['username'],
+                    'password' => $data['password'],
+                    'firstname' => $data['first_name'],
+                    'lastname' => $data['last_name'],
+                    'email' => $data['email'],
+                    'lang' => 'en',
                 ]
-            ];
+            ]
+        ];
 
-            $users = MoodleClient::create()->registerMoodleUser($moodleData);
+        $users = MoodleClient::create()->registerMoodleUser($moodleData);
 
+        if ($users && is_array($users) && count($users) > 0) {
             return AppUser::create([
                 'm_userid' => $users[0]->id,
                 'first_name' => $data['first_name'],
@@ -110,7 +110,7 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
-        } catch (\Throwable $th) {
+        } else {
             return redirect()->route('app.register')->withErrors("Unable to register, please try again.");
         }
     }

@@ -103,23 +103,23 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         try {
-            $moodleData = [
-                "users" => [
-                    [
-                        'username' => $data['username'],
-                        'password' => $data['password'],
-                        'firstname' => $data['first_name'],
-                        'lastname' => $data['last_name'],
-                        'email' => $data['email'],
-                        'lang' => 'en',
-                    ]
-                ]
-            ];
+            // $moodleData = [
+            //     "users" => [
+            //         [
+            //             'username' => $data['username'],
+            //             'password' => $data['password'],
+            //             'firstname' => $data['first_name'],
+            //             'lastname' => $data['last_name'],
+            //             'email' => $data['email'],
+            //             'lang' => 'en',
+            //         ]
+            //     ]
+            // ];
 
-            $users = MoodleClient::create()->registerMoodleUser($moodleData);
+            // $users = MoodleClient::create()->registerMoodleUser($moodleData);
 
             return AppUser::create([
-                'm_userid' => $users[0]->id,
+                'm_userid' => 0,
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'username' => $data['username'],

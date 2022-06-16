@@ -59,6 +59,7 @@ Route::middleware(['auth:app_users', 'category_menu_view'])
         Route::post('payment/{course}', [PaymentController::class, 'payment'])->name('payment');
         Route::get('payment/status', [PaymentController::class, 'status'])->name('payment.status');
         Route::get('course-purchase-form/{courseId}', [HomeController::class, 'renderCourseBuyModalForm'])->name('course-purchase-form');
+        Route::post('verify-account', [HomeController::class, 'verifyAccount'])->name('verify-account');
     });
 
 

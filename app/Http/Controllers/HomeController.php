@@ -9,6 +9,7 @@ use App\Course;
 use App\Helpers\MoodleClient;
 use App\Mail\UserContactFormMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -123,6 +124,41 @@ class HomeController extends Controller
             return response()->json(null);
         } catch (\Exception $e) {
             return response()->json(["message" => "Something went wrong"], 422);
+        }
+    }
+
+    public function verifyAccount(Request $request) {
+        $request->validate([
+            'password' => ['required']
+        ]);
+
+        $authedUser = auth('app_users')->user();
+
+        if (Hash::check($request->password, $authedUser->password)) {
+            $moodleData = [
+                "users" => [
+                    [
+                        'username' => $authedUser->username,
+                        'password' => $request->password,
+                        'firstname' => $authedUser->first_name,
+                        'lastname' => $authedUser->last_name,
+                        'email' => $authedUser->email,
+                        'lang' => 'en',
+                    ]
+                ]
+            ];
+
+            try {
+                $users = MoodleClient::create()->registerMoodleUser($moodleData);
+                $authedUser->m_userid = $users[0]->id;
+                $authedUser->save();
+
+                return response()->Json(['msg' => 'Your account has been verified']);
+            } catch (\Throwable $th) {
+                return response()->json(['error' => "Something went wrong, please try again"], 500);
+            }
+        } else {
+            return response()->json(['error' => "Incorrect account password."], 400);
         }
     }
 }

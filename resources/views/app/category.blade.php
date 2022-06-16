@@ -51,11 +51,15 @@
                                             Login
                                         </a>
                                         @else
+                                        @if (auth('app_users')->user()->m_userid > 0)
                                         <button data-course-id="{{ $course->id }}"
                                             class="course-purchase-button btn btn-success">
                                             <i class="fas fa-cart-plus me-1 text-white"></i>
                                             <span>Purchase</span>
                                         </button>
+                                        @else
+                                        <button class="btn btn-primary verify-account-btn">Verify account</button>
+                                        @endif
                                         @endif
                                         @else
                                         <a href="{{ route('course', $course->id) }}" class="btn btn-success text-white">
@@ -79,6 +83,7 @@
                             </div>
                         </div>
                     </div>
+
                     @empty
                     <p>No courses found.</p>
                     @endforelse
@@ -87,6 +92,8 @@
         </div>
     </div>
 </section>
+
+@include('partials.app._verify-account-modal')
 
 @endsection
 

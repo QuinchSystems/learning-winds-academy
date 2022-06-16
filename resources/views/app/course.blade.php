@@ -78,10 +78,14 @@
                                 @if(auth('app_users')->user()->courses->contains($course))
                                 <span class="text-success">Already purchased</span>
                                 @else
+                                @if (auth('app_users')->user()->m_userid > 0)
                                 <button class="course-purchase-button btn btn-success">
                                     <i class="fas fa-cart-plus me-1 text-white"></i>
                                     <span>Purchase</span>
                                 </button>
+                                @else
+                                <button class="btn btn-primary verify-account-btn">Verify account</button>
+                                @endif
                                 @endif
                                 @else
                                 <a href="{{ route('app.login') }}" class="btn btn-success text-white">
@@ -142,6 +146,8 @@
                         </div>
                     </div>
                 </div>
+
+                @include('partials.app._verify-account-modal')
             </div>
         </div>
     </div>
